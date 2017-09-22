@@ -20,7 +20,7 @@ public class Service {
     Future<Group> f = null;
     List<Group> groupList = new ArrayList();
     List<Future> futureList = new ArrayList();
-    String[] webArr = {"http://165.227.151.92:8080/CA1/"};
+    String[] webArr = {"http://165.227.151.92:8080/CA1/","http://207.154.220.147/company/","http://46.101.216.31/CA1-Group13","http://www.alfen.me/CA1"};
     ExecutorService ex = Executors.newFixedThreadPool(4);
     ArrayBlockingQueue<String> websites = new ArrayBlockingQueue(webArr.length);
 
@@ -48,7 +48,8 @@ public class Service {
             f = ex.submit(test);
             futureList.add(f);
         }
-
+        ex.shutdown();
+        
         try {
             //System.out.println(futureList.get(0).get());
             for (int i = 0; i < futureList.size(); i++) {
@@ -62,7 +63,6 @@ public class Service {
         } catch (ExecutionException ex) {
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ex.shutdown();
     }
 
     public List getList() {
